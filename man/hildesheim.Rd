@@ -92,7 +92,7 @@ boot.hildesheim <- function (y,s,X,nrep,a,b) {
   cat("\n      Estimated log(OR)=",log(oddsr[1]),"\n",
       "Bootstrap mean log(OR)=",b,"\n",
       "          Bootstrap SE=",se,"\n",
-      "                Wald Z=",ztest," (P=",2*pnorm(ztest,lower=F),")\n")
+      "                Wald Z=",ztest," (P=",2*pnorm(ztest,lower=FALSE),")\n")
 }
 boot.hildesheim(y,s,~substudy+hsv.inac*hsv.gold*cancer,nrep=50,cancer,hsv.gold)
 

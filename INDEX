@@ -1,19 +1,24 @@
 anova.gllm              Summarize multiple results from gllm
 as207                   Generalized log-linear modelling by EM and
                         iterative proportional fitting
-boot.gllm               Bootstrap for generalized log-linear modelling 
+boot.gllm               Bootstrap for generalized log-linear modelling
 boot.table              Produce one bootstrap replicate of a vector of
                         counts
 emgllm                  Generalized log-linear modelling by EM and
                         iterative proportional fitting
-gllm                    Generalized log-linear modelling 
+gllm                    Generalized log-linear modelling
 hildesheim              Invasive Cervical Cancer v exposure to Herpes
-                        Simplex Virus 
+                        Simplex Virus
+ld2.model               Write design and filter matrices for
+                        log-linear model of linkage disequilibrium
+                        between two codominant autosomal loci
+ld2                     Estimate linkage disequilibrium between two
+                        codominant autosomal loci
 lsat                    Five dichotomous items from the Law School
-                        Admission Test (LSAT) 
+                        Admission Test (LSAT)
 print.summary.gllm      Print results of gllm
 scatter                 Create a filter matrix from a summary array of
                         indices
 scoregllm               Generalized log-linear modelling via Fisher
-                        scoring 
+                        scoring
 summary.gllm            Summarize results of gllm

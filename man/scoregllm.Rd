@@ -106,7 +106,7 @@ X<-  matrix(c( 1,0,0,0,0,0,1,
                1,2,0,1,0,0,0,
                1,2,1,1,0,1,1,
                1,2,1,1,0,1,1,
-               1,2,2,1,1,2,2), byrow=T, ncol=7) 
+               1,2,2,1,1,2,2), byrow=TRUE, ncol=7) 
 
 colnames(X)<-c("Intercept", "A", "B", "P1", "P2", "Delta", "Epsilon")
 res<-scoregllm(y,s,X[,c(1:6)], 
