@@ -69,8 +69,7 @@ C
       goto 300
   220 nkk = nkp
       do 230 i = 1, ni
-        c(i, nkk) = one - w(4, i)
-  230 continue
+  230 c(i, nkk) = one - w(4, i)
 C
 C       enter the EM algorithm
 C
@@ -79,8 +78,7 @@ C
   300  continue
        it=it+1
        do 310 j = 1,nj
-         f(j) = zero
-  310  continue
+  310  f(j) = zero
        do 320 i = 1,ni
          j = ji(i)
          f(j) = f(j) + e(i)
@@ -103,25 +101,20 @@ C
       do 360 k = 1, nkk
         v(1, k) = zero
         do 350 i = 1, ni
-          v(1, k) = v(1, k) + c(i, k) * w(1, i)
-  350   continue
+  350   v(1, k) = v(1, k) + c(i, k) * w(1, i)
   360 continue
 C
 C       enter the IPF algorithm
 C
   400 do 410 i = 1, ni
-        w(2, i) = e(i)
-  410 continue
+  410 w(2, i) = e(i)
       do 440 k = 1, nkk
         v(2, k) = zero
         do 420 i = 1, ni
-          v(2, k) = v(2, k) + c(i,k) * e(i)
-  420   continue
-        do 430 i = 1, ni
-        if (c(i, k) .gt. eps .and. v(2, k) .gt. eps) then
-          e(i) = e(i) * (v(1, k) / v(2, k)) ** c(i, k)
-        end if
-  430   continue
+  420 v(2, k) = v(2, k) + c(i,k) * e(i)
+      do 430 i = 1, ni
+  430 if (c(i, k) .gt. eps .and. v(2, k) .gt. eps)
+     *  e(i) = e(i) * (v(1, k) / v(2, k)) ** c(i, k)
   440 continue
       do 450 i = 1, ni
         if (abs(e(i) - w(2, i)) .gt. conv) goto 400

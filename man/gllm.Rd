@@ -5,8 +5,6 @@
 Fits log-linear models for incomplete contingency tables,
 including some latent class models, via EM and Fisher scoring approaches.
 }
-\keywords{ models regression multivariate
-}
 \usage{
 gllm(y,s,X,method="hybrid",em.maxit=1,tol=0.00001)
 }
@@ -19,7 +17,6 @@ gllm(y,s,X,method="hybrid",em.maxit=1,tol=0.00001)
      method for fitting the model.}
   \item{em.maxit}{is the number of EM iterations.}
   \item{tol}{is the convergence criterion for the LR criterion.}
- }
 }
 \values{ 
   A list with components:
@@ -69,7 +66,7 @@ for \eqn{b} and \eqn{z}, with an EM fitting for \eqn{y}, \eqn{z} and
 
 The \code{gllm} function is actually a simple wrapper for \code{scoregllm()}.
 }
-\references {
+\references{
 Espeland MA (1986).  A general class of models for discrete multivariate
         data. \emph{Commun. Statist.-Simula} 15:405-424.
 
@@ -111,7 +108,7 @@ d<-as.integer(gl(2,2 ,64))-1
 e<-as.integer(gl(2,1 ,64))-1
 X<-cbind(i,x,a,b,c,d,e,x*cbind(a,b,c,d,e))
 colnames(X)<-c("Int","X","A","B","C","D","E","AX","BX","CX","DX","EX")
-res1<-gllm(y,s,X,method="em",tol=0.0001)
+res1<-gllm(y,s,X,method="em",tol=0.01)
 res1
 #
 # An example of model fitting: gametic association between two diallelic loci
@@ -154,3 +151,5 @@ res2
 #
 
 }
+\keyword{category}
+\keyword{models}

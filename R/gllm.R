@@ -5,7 +5,7 @@
 #
 .First.lib <- function(lib,pkg) {
   library.dynam("gllm",pkg,lib)
-  cat("This is gllm 0.1\n")
+  cat("This is gllm 0.20\n")
 }
 #
 # EM IPF algorithm of Haber AS207
@@ -90,12 +90,18 @@ scoregllm<-function(y,s,X,m,tol=1e-5) {
   full.table<-m
   coefficients<-as.vector(b)
   names(coefficients)<-rownames(X)
+  bl<-(rownames(X)=="")
+  names(coefficients)[bl]<-paste("beta",1:nrow(X),sep="")[bl]
   se<-sqrt(diag(V))
   df<-length(y)-qr(X)$rank
-  return(iter,deviance,df,
-         coefficients,se,V,
-         observed.values,fitted.values,residuals,
-         full.table)
+  res<-list(iter=iter,deviance=deviance,df=df,
+            coefficients=coefficients,se=se,V=V,
+            observed.values=observed.values,
+            fitted.values=fitted.values,
+            residuals=residuals,
+            full.table=full.table)
+  class(res) <- "gllm"
+  res
 }
 #
 # Global front end to call either/both routines
@@ -131,7 +137,7 @@ summary.gllm <- function(object, ...) {
   summary$model.df<-object$df
   summary$coefficients<-tab.coef
   summary$residuals<-tab.fitted
-  attr(summary,"class") <- "summary.gllm"
+  class(summary) <- "summary.gllm"
   summary
 }
 #
@@ -157,16 +163,26 @@ print.summary.gllm <- function(x, digits=NULL, show.residuals = FALSE, ...) {
 #
 # Bootstrap a contingency table.  Sampling zeroes augmented by 1/2.
 #
-boot.table <- function(y) { 
+boot.table <- function(y,strata=NULL) {  
   ynew<-rep(0.5, length(y))
-  tab.ynew<-table(sample(rep(1:length(y),y),replace=TRUE))
-  ynew[as.integer(names(tab.ynew))]<-tab.ynew
+  if (is.null(strata)) {
+    tab.ynew<-table(sample(rep(1:length(y),y),replace=TRUE))
+    ynew[as.integer(names(tab.ynew))]<-tab.ynew
+  }else{
+    s<-as.integer(strata)
+    for(i in unique(s)) {
+      idx<-s==i
+      tab.ynew<-table(sample(rep((1:length(y))[idx],y[idx]),replace=TRUE))
+      ynew[as.integer(names(tab.ynew))]<-tab.ynew
+    }
+  }
   ynew
 }
 #
 # Bootstrap a GLLM returning the full fitted tables
 #
-boot.gllm <- function(y,s,X,method="hybrid",em.maxit=1,tol=0.00001,R=200) {
+boot.gllm <- function(y,s,X,method="hybrid",em.maxit=1,tol=0.00001,
+                      strata=NULL,R=200) {
   if (method=="hybrid" || method=="scoring") {
     f0<-scoregllm(y,s,X,as.array(emgllm(y,s,X,maxit=em.maxit,tol=tol)$full.table))$full.table
   }else{
@@ -175,10 +191,52 @@ boot.gllm <- function(y,s,X,method="hybrid",em.maxit=1,tol=0.00001,R=200) {
   result<-as.matrix(t(f0))
   cat("It",0,":",y,"\n")
   for(i in 1:R) {
-    ynew<-boot.table(y)
+    ynew<-boot.table(y,strata=strata)
     cat("It",i,":",ynew,"\n")
     result<-rbind(result, t(scoregllm(ynew,s,X,as.array(emgllm(ynew,s,X,
                             maxit=em.maxit,tol=tol)$full.table))$full.table))
   }
   result
 }
+#
+# After anova.multinom
+#
+anova.gllm <- function(object, ..., test = c("Chisq", "none"))
+{
+  modelname<-unlist(strsplit(deparse(match.call()),"[(),]")) 
+  modelname<-gsub("[() ]","",modelname)
+  modelname<-gsub("object=","",modelname)
+  modelname<-modelname[-c(1,grep("=",modelname))]
+  print(modelname)
+  test <- match.arg(test)
+  dots <- list(...)
+  if(length(dots) == 0)
+    stop("anova is not implemented for a single gllm object")
+  mlist <- list(object, ...)
+  nt <- length(mlist)
+  dflis <- sapply(mlist, function(x) x$df)
+  s <- order(dflis, decreasing=TRUE)
+  mlist <- mlist[s]
+  if(any(!sapply(mlist, inherits, "gllm"))) {
+    stop("not all objects are of class `gllm'")
+  }
+  mds <- modelname[s]
+  dfs <- dflis[s]
+  lls <- sapply(mlist, function(x) x$deviance)
+  tss <- c("", paste(1:(nt - 1), 2:nt, sep = " vs "))
+  df <- c(NA, -diff(dfs))
+  x2 <- c(NA, -diff(lls))
+  pr <- c(NA, 1 - pchisq(x2[-1], df[-1]))
+  out <- data.frame(Model = mds, Resid.df = dfs,
+                    Deviance = lls, Pr.Fit = 1-pchisq(lls,dfs), 
+                    Test = tss, Df = df, LRtest = x2,
+                    Prob = pr)
+  names(out) <- c("Model", "Resid. df", "Resid. Dev", "Pr(GOFChi)",
+                  "Test", "   Df", "LR stat.", "Pr(Chi)")
+  if(test=="none") out <- out[, 1:6]
+  class(out) <- c("Anova", "data.frame")
+  attr(out, "heading") <-
+    c("Likelihood ratio tests of Loglinear Models\n")
+  out
+}
+

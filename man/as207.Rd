@@ -6,8 +6,6 @@ fitting}
 Fits log-linear models for incomplete contingency tables,
 via an EM approach.
 }
-\keywords{ models regression multivariate
-}
 \usage{
 as207(y,s,X,maxit,tol) 
 }
@@ -18,7 +16,6 @@ as207(y,s,X,maxit,tol)
   \item{X}{is the design matrix.}
   \item{maxit}{is the number of EM iterations.}
   \item{tol}{is the convergence criterion for the LR criterion.}
- }
 }
 \values{ 
   A list with components:
@@ -43,8 +40,10 @@ as207(y,s,X,maxit,tol)
 \details{ 
 The call to the slightly modified AS207 Fortran code from Haber (1984).
 }
-\references {
+\references{
 Haber M (1984).  AS207: Fitting a general log-linear model.  \emph{Appl
         Statist} 33:358-362.
 }
+\keyword{category}
+\keyword{models}
 

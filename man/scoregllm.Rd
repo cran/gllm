@@ -5,8 +5,6 @@
 Fits log-linear models for incomplete contingency tables,
 including some latent class models, via Fisher scoring approaches.
 }
-\keywords{ models regression multivariate
-}
 \usage{
 scoregllm(y,s,X,m,tol=1e-8)
 }
@@ -18,7 +16,6 @@ scoregllm(y,s,X,m,tol=1e-8)
   \item{m}{is a vector of starting values for the full (unobserved)
      contingency table.}
   \item{tol}{is the convergence criterion for the LR criterion.}
- }
 }
 \values{ 
   A list with components:
@@ -64,7 +61,7 @@ Espeland (1986).
 
 The \code{gllm} function is actually a simple wrapper for \code{scoregllm()}.
 }
-\references {
+\references{
 Espeland MA (1986).  A general class of models for discrete multivariate
         data. \emph{Commun. Statist.-Simula} 15:405-424.
 
@@ -114,7 +111,9 @@ X<-  matrix(c( 1,0,0,0,0,0,1,
 colnames(X)<-c("Intercept", "A", "B", "P1", "P2", "Delta", "Epsilon")
 res<-scoregllm(y,s,X[,c(1:6)], 
                c(255,176,176,121,164,37,113,25,164,113,37,25,90,20,20,5))
-res
+summary(res)
 #
 
 }
+\keyword{ models }
+\keyword{ category }

@@ -1,14 +1,15 @@
-as207                    Generalized log-linear modelling by EM and
-                         iterative proportional fitting
-boot.gllm                Bootstrap for generalized log-linear modelling
-boot.table               Produce one bootstrap replicate of a vector of
-                         counts
-emgllm                   Generalized log-linear modelling by EM and
-                         iterative proportional fitting
-gllm                     Generalized log-linear modelling
-print.summary.gllm       Print results of gllm
-scatter                  Create a filter matrix from a summary array of
-                         indices
-scoregllm                Generalized log-linear modelling via Fisher
-                         scoring
-summary.gllm             Summarize results of gllm
+anova.gllm              Summarize multiple results from gllm
+as207                   Generalized log-linear modelling by EM and
+                        iterative proportional fitting
+boot.gllm               Bootstrap for generalized log-linear modelling 
+boot.table              Produce one bootstrap replicate of a vector of
+                        counts
+emgllm                  Generalized log-linear modelling by EM and
+                        iterative proportional fitting
+gllm                    Generalized log-linear modelling 
+print.summary.gllm      Print results of gllm
+scatter                 Create a filter matrix from a summary array of
+                        indices
+scoregllm               Generalized log-linear modelling via Fisher
+                        scoring 
+summary.gllm            Summarize results of gllm

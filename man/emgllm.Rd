@@ -6,8 +6,6 @@ fitting}
 Fits log-linear models for incomplete contingency tables,
 including some latent class models, via an EM approach.
 }
-\keywords{ models regression multivariate
-}
 \usage{
 emgllm(y,s,X,maxit=1000,tol=0.0000001) 
 }
@@ -18,7 +16,6 @@ emgllm(y,s,X,maxit=1000,tol=0.0000001)
   \item{X}{is the design matrix.}
   \item{maxit}{is the number of EM iterations.}
   \item{tol}{is the convergence criterion for the LR criterion.}
- }
 }
 \values{ 
   A list with components:
@@ -60,7 +57,7 @@ for \eqn{b} and \eqn{z}, with an EM fitting for \eqn{y}, \eqn{z} and
 The \code{emgllm} function is a wrapper for the slightly modified AS207
 Fortran code from Haber (1984).
 }
-\references {
+\references{
 Espeland MA (1986).  A general class of models for discrete multivariate
         data. \emph{Commun. Statist.-Simula} 15:405-424.
 
@@ -102,10 +99,12 @@ d<-as.integer(gl(2,2 ,64))-1
 e<-as.integer(gl(2,1 ,64))-1
 X<-cbind(i,x,a,b,c,d,e,x*cbind(a,b,c,d,e))
 colnames(X)<-c("Int","X","A","B","C","D","E","AX","BX","CX","DX","EX")
-res<-emgllm(y,s,X)
+res<-emgllm(y,s,X, tol=0.01)
 res
 #
 # Obtain standard errors for parameter estimates
 #
-scoregllm(y,s,X,as.array(res$full.table)) 
+summary(scoregllm(y,s,X,as.array(res$full.table)))
 }
+\keyword{category}
+\keyword{models}

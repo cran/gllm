@@ -7,10 +7,8 @@ including some latent class models, via EM and Fisher scoring approaches.
 Performs a bootstrap for the sampling distribution of the 
 full unobserved table.
 }
-\keywords{ models regression multivariate
-}
 \usage{
-boot.gllm(y,s,X,method="hybrid",em.maxit=1,tol=0.00001,R=200)
+boot.gllm(y,s,X,method="hybrid",em.maxit=1,tol=0.00001,strata=NULL,R=200)
 }
 \arguments{
   \item{y}{is the observed contingency table.}
@@ -21,8 +19,8 @@ boot.gllm(y,s,X,method="hybrid",em.maxit=1,tol=0.00001,R=200)
      method for fitting the model.}
   \item{em.maxit}{is the number of EM iterations.}
   \item{tol}{is the convergence criterion for the LR criterion.}
+  \item{strata}{is a vector identifying the sampling strata.}
   \item{R}{is the number of bootstrap replicates.}
- }
 }
 \values{ 
   A matrix \eqn{R+1} by \code{ncol(X)} containing the initial estimate
@@ -43,10 +41,11 @@ error of this statistic may be a complex function of the observed counts
 and model parameters.
 
 Bootstrapping is one way to estimate such standard errors from a complex
-sampling design.
+sampling design.  The bootstrap sampling may be stratified if the design
+implies this, e.g. product-multinomial.
 
 }
-\references {
+\references{
 Hochberg Y (1977).  On the use of double sampling schemes in analyzing
         categorical data with misclassification errors.  \emph{J Am Statist
         Ass} 72:914-921. 
@@ -152,5 +151,7 @@ boot.hochberg <- function (y,s,X,nrep,a,b) {
   cat("Bootstrap SE=",sd(oddsr[2:(1+nrep)]),"\n\nQuantiles\n\n")
   quantile(oddsr[2:(1+nrep)],c(0.025,0.50,0.975))
 }
-boot.hochberg(y,s,X,nrep=250,a,b)
+boot.hochberg(y,s,X,nrep=20,a,b)
 }
+\keyword{category}
+\keyword{models}

@@ -4,8 +4,6 @@
 \description{
 Summarizes contents of result of call to \code{gllm}.
 }
-\keywords{ print
-}
 \usage{
 summary.gllm(object,...) 
 }
@@ -22,4 +20,6 @@ summary.gllm(object,...)
   \item{model.df} {the model degrees of freedom}
   \item{coefficients} {the model parameter estimates, standard errors}
   \item{residuals} {Observed and fitted counts, plus Pearsonian residuals}
+}
+\keyword{ print
 }
