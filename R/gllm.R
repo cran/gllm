@@ -75,7 +75,7 @@ scoregllm<-function(y,s,X,m,tol=1e-5) {
   iter<- 0
   olddev<- -1
   deviance<- 0
-  b<-solve(t(X),log(m),tol=1e-10)
+  b<-qr.solve(t(X),log(m),tol=1e-10)
 #
 # Main loop
 #
