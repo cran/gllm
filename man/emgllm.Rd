@@ -13,7 +13,7 @@ emgllm(y,s,X,maxit=1000,tol=0.0000001)
   \item{y}{is the observed contingency table.}
   \item{s}{is a vector of indices, one for each cell of the full (unobserved) 
      contingency table, representing the appropriate cell of \code{y}}
-  \item{X}{is the design matrix.}
+  \item{X}{is the design matrix, or a formula.}
   \item{maxit}{is the number of EM iterations.}
   \item{tol}{is the convergence criterion for the LR criterion.}
 }

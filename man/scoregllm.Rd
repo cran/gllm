@@ -12,7 +12,7 @@ scoregllm(y,s,X,m,tol=1e-8)
   \item{y}{is the observed contingency table.}
   \item{s}{is a vector of indices, one for each cell of the full (unobserved) 
      contingency table, representing the appropriate cell of \code{y}}
-  \item{X}{is the design matrix.}
+  \item{X}{is the design matrix or a formula.}
   \item{m}{is a vector of starting values for the full (unobserved)
      contingency table.}
   \item{tol}{is the convergence criterion for the LR criterion.}
@@ -70,7 +70,7 @@ Espeland MA, Hui SL (1987).  A general approach to analyzing epidemiologic
         43:1001-1012.
 
 Thompson R, Baker RJ (1981).  Composite link functions in generalized
-        linear models.  \emph{Appl Stat} 30: 125-131.
+        linear models.  \emph{Appl Statist} 30: 125-131.
 }
 
 \examples{ 

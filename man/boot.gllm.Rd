@@ -14,7 +14,7 @@ boot.gllm(y,s,X,method="hybrid",em.maxit=1,tol=0.00001,strata=NULL,R=200)
   \item{y}{is the observed contingency table.}
   \item{s}{is a vector of indices, one for each cell of the full (unobserved) 
      contingency table, representing the appropriate cell of \code{y}}
-  \item{X}{is the design matrix.}
+  \item{X}{is the design matrix, or a formula.}
   \item{method}{chooses the EM, Fisher scoring or a hybrid (EM then scoring)
      method for fitting the model.}
   \item{em.maxit}{is the number of EM iterations.}
@@ -87,22 +87,16 @@ y<-c(y1,y2)
 s <-c(1, 1, 2, 2, 1, 1, 2, 2, 3, 3, 4, 4, 3, 3, 4, 4,
       5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
 #
-# model is AA*BB* + L (dummy study variable)
-# so terms are intercept, A, A*, B, B*, L, A.A*, A.B, A.B*, A*.B, A*.B*
-#              B.B*, A.A*.B, A.A*.B*, A.B.B*, A*.B.B*, A.A*.B.B*
+# Model combining the tables is A*A2*B*B2 + L (dummy study variable)
 #
-i <- rep(1,32)
 a <- 2-as.integer(gl(2,1,32))
 a2<- 2-as.integer(gl(2,2,32))
 b <- 2-as.integer(gl(2,4,32))
 b2<- 2-as.integer(gl(2,8,32))
 l <- 2-as.integer(gl(2,16,32))
 
-X<-cbind(i,a,a2,b,b2,l,a*a2,a*b,a*b2,a2*b,a2*b2,b*b2,
-         a*a2*b,a*a2*b2,a*b*b2,a2*b*b2,a*a2*b*b2)
-colnames(X)<-c("intercept", "A", "A*", "B", "B*", "L",
-                "A.A*", "A.B", "A.B*", "A*.B", "A*.B*", "B.B*",
-                "A.A*.B", "A.A*.B*", "A.B.B*", "A*.B.B*", "A.A*.B.B*")
+X <- model.matrix( ~ a*a2*b*b2+l)
+
 #
 # Table 1 using unreliable measure
 #

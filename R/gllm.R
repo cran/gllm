@@ -5,12 +5,15 @@
 #
 .First.lib <- function(lib,pkg) {
   library.dynam("gllm",pkg,lib)
-  cat("This is gllm 0.20\n")
+  cat("This is gllm 0.25\n")
 }
 #
 # EM IPF algorithm of Haber AS207
 #
 emgllm <- function(y,s,X,maxit=1000,tol=0.00001) {
+  if (typeof(X)=="language") {
+    X<-model.matrix(X)
+  }
   X<-cbind(X,double(nrow(X)))
   em<-as207(y,s,X,maxit,tol) 
   deviance<-em$cslr
@@ -60,6 +63,12 @@ scoregllm<-function(y,s,X,m,tol=1e-5) {
 # Initialize
 #
   eps<-0.00001
+  call <- match.call()
+  formula<-NULL
+  if (typeof(X)=="language") {
+    formula<-X   
+    X<-model.matrix(X)
+  }
   X<-t(X)
   S<-scatter(y,s)
   z<-as.vector(S %*% solve(t(S) %*% S, tol=1e-10) %*% y)
@@ -94,7 +103,8 @@ scoregllm<-function(y,s,X,m,tol=1e-5) {
   names(coefficients)[bl]<-paste("beta",1:nrow(X),sep="")[bl]
   se<-sqrt(diag(V))
   df<-length(y)-qr(X)$rank
-  res<-list(iter=iter,deviance=deviance,df=df,
+  res<-list(call=call,formula=formula,
+            iter=iter,deviance=deviance,df=df,
             coefficients=coefficients,se=se,V=V,
             observed.values=observed.values,
             fitted.values=fitted.values,
@@ -130,6 +140,7 @@ summary.gllm <- function(object, ...) {
                          object$residuals)
   colnames(tab.fitted)<-c("Observed Count","Predicted","Residual")  
   summary<- list()
+  summary$call<-object$call
   summary$nobs<-length(object$observed.values)
   summary$nfull<-length(object$full.table)
   summary$mean.cell<-mean(object$observed.values)
@@ -148,6 +159,9 @@ print.summary.gllm <- function(x, digits=NULL, show.residuals = FALSE, ...) {
     digits <- options()$digits
   else options(digits=digits)
 
+  cat("\nCall:\n")
+  cat(paste(deparse(x$call), sep = "\n", collapse = "\n"), 
+          "\n\n", sep = "")
   cat("\nNo. cells in observed table: ", x$nobs, "\n",sep="")
   cat("No. cells in complete table: ", x$nfull, "\n",sep="")
   cat("    Mean observed cell size: ", x$mean.cell, "\n",sep="")
@@ -207,11 +221,10 @@ anova.gllm <- function(object, ..., test = c("Chisq", "none"))
   modelname<-gsub("[() ]","",modelname)
   modelname<-gsub("object=","",modelname)
   modelname<-modelname[-c(1,grep("=",modelname))]
-  print(modelname)
+
   test <- match.arg(test)
   dots <- list(...)
-  if(length(dots) == 0)
-    stop("anova is not implemented for a single gllm object")
+
   mlist <- list(object, ...)
   nt <- length(mlist)
   dflis <- sapply(mlist, function(x) x$df)
@@ -223,7 +236,8 @@ anova.gllm <- function(object, ..., test = c("Chisq", "none"))
   mds <- modelname[s]
   dfs <- dflis[s]
   lls <- sapply(mlist, function(x) x$deviance)
-  tss <- c("", paste(1:(nt - 1), 2:nt, sep = " vs "))
+  tss <- ""
+  if (nt>1) tss <- c("", paste(1:(nt - 1), 2:nt, sep = " vs "))
   df <- c(NA, -diff(dfs))
   x2 <- c(NA, -diff(lls))
   pr <- c(NA, 1 - pchisq(x2[-1], df[-1]))

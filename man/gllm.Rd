@@ -12,7 +12,7 @@ gllm(y,s,X,method="hybrid",em.maxit=1,tol=0.00001)
   \item{y}{is the observed contingency table.}
   \item{s}{is a vector of indices, one for each cell of the full (unobserved) 
      contingency table, representing the appropriate cell of \code{y}}
-  \item{X}{is the design matrix.}
+  \item{X}{is the design matrix, or a formula.}
   \item{method}{chooses the EM, Fisher scoring or a hybrid (EM then scoring)
      method for fitting the model.}
   \item{em.maxit}{is the number of EM iterations.}
@@ -78,7 +78,7 @@ Haber M (1984).  AS207: Fitting a general log-linear model.  \emph{Appl
         Statist} 33:358-362.
 
 Thompson R, Baker RJ (1981).  Composite link functions in generalized
-        linear models.  \emph{Appl Stat} 30: 125-131.
+        linear models.  \emph{Appl Statist} 30: 125-131.
 }
 
 \examples{ 
@@ -86,6 +86,7 @@ Thompson R, Baker RJ (1981).  Composite link functions in generalized
 # latent class analysis: two latent classes
 #
 # Data matrix 2x2x2x2x2 table of responses to five binary items
+# (items 11-15 of sections 6-7 of the Law School Admission Test)
 #
 y<-c( 3,   6,   2,   11,   1,   1,   3,    4,
       1,   8,   0,   16,   0,   3,   2,   15,
@@ -99,16 +100,14 @@ s<-  c(1:32,1:32)
 # Design matrix: x is the latent variable (2 levels), 
 # a-e are the observed variables
 #
-i<-rep(1,64)
 x<-as.integer(gl(2,32,64))-1
 a<-as.integer(gl(2,16,64))-1
 b<-as.integer(gl(2,8 ,64))-1
 c<-as.integer(gl(2,4 ,64))-1
 d<-as.integer(gl(2,2 ,64))-1
 e<-as.integer(gl(2,1 ,64))-1
-X<-cbind(i,x,a,b,c,d,e,x*cbind(a,b,c,d,e))
-colnames(X)<-c("Int","X","A","B","C","D","E","AX","BX","CX","DX","EX")
-res1<-gllm(y,s,X,method="em",tol=0.01)
+
+res1<-gllm(y,s,~x*(a+b+c+d+e),method="em",tol=0.01)
 res1
 #
 # An example of model fitting: gametic association between two diallelic loci

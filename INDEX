@@ -7,6 +7,10 @@ boot.table              Produce one bootstrap replicate of a vector of
 emgllm                  Generalized log-linear modelling by EM and
                         iterative proportional fitting
 gllm                    Generalized log-linear modelling 
+hildesheim              Invasive Cervical Cancer v exposure to Herpes
+                        Simplex Virus 
+lsat                    Five dichotomous items from the Law School
+                        Admission Test (LSAT) 
 print.summary.gllm      Print results of gllm
 scatter                 Create a filter matrix from a summary array of
                         indices
