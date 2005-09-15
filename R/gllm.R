@@ -5,7 +5,7 @@
 #
 .First.lib <- function(lib,pkg) {
   library.dynam("gllm",pkg,lib)
-  cat("This is gllm 0.27\n")
+  cat("This is gllm 0.30\n")
 }
 #
 # EM IPF algorithm of Haber AS207
@@ -43,7 +43,8 @@ as207 <- function(y,s,X,maxit,tol)
             f = double(length(y)),
             cspr = double(1),
             cslr = double(1),
-            ifault=as.integer(0))
+            ifault=as.integer(0),
+            PACKAGE="gllm")
 #
 # Convert scatter vector used by AS207 to matrix for scoring method
 #

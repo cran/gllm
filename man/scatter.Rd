@@ -13,14 +13,14 @@ scatter(y,s)
   \item{s}{is a vector of indices, one for each cell of the full (unobserved) 
      contingency table, representing the appropriate cell of \code{y}}
 }
-\values{ 
+\value{ 
   \item{S} {A matrix of orthogonal columns of 1s and 0s}
 }
+\author{ David L Duffy }
 \examples{
 y<-double(3)
 z<-1:5
 z \%*\% scatter(y,c(1,1,2,3,3))
 ## 1+2, 3, 4+5
 }
-\keyword{ manip
-}
+\keyword{ manip }

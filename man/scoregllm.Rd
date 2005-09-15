@@ -6,7 +6,7 @@ Fits log-linear models for incomplete contingency tables,
 including some latent class models, via Fisher scoring approaches.
 }
 \usage{
-scoregllm(y,s,X,m,tol=1e-8)
+scoregllm(y,s,X,m,tol=1e-5)
 }
 \arguments{
   \item{y}{is the observed contingency table.}

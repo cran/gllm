@@ -12,7 +12,7 @@ anova.gllm(object, ..., test=c("Chisq","none"))
   \item{...}{other objects from gllm.}
   \item{test}{evaluate LRTS for model, or nothing.}
 }
-\values{ 
+\value{ 
   A list with components:
   \item{Model} {name of each object being compared}
   \item{Resid.df} {residual degrees of freedom for each model}
@@ -21,7 +21,7 @@ anova.gllm(object, ..., test=c("Chisq","none"))
   \item{Test} {models compared in stepwise testing}
   \item{Df} {degrees of freedom of model comparson}
   \item{LRtest} {likelihood ratio test statistic comparing models}
-  \item{Prob} {chi-square based P-value for LRTS}
+  \item{Prob} {chi-square based P-value for LRTS}.
 }
-\keyword{ print
-}
+\author{ David L Duffy }
+\keyword{ print }

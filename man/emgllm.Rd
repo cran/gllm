@@ -7,7 +7,7 @@ Fits log-linear models for incomplete contingency tables,
 including some latent class models, via an EM approach.
 }
 \usage{
-emgllm(y,s,X,maxit=1000,tol=0.0000001) 
+emgllm(y,s,X,maxit=1000,tol=0.00001) 
 }
 \arguments{
   \item{y}{is the observed contingency table.}

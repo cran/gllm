@@ -1,8 +1,10 @@
 \name{summary.gllm}
 \alias{summary.gllm}
+\alias{print.summary.gllm}
 \title{Summarize results of gllm}
 \description{
-Summarizes contents of result of call to \code{gllm}.
+Summarizes contents of result of call to \code{gllm}.  The print method
+pretty prints the summary object.
 }
 \usage{
 summary.gllm(object,...) 
@@ -11,7 +13,7 @@ summary.gllm(object,...)
   \item{object}{is the object output from gllm.}
   \item{...}{other arguments}
 }
-\values{ 
+\value{ 
   A list with components:
   \item{nobs} {the number of cells in the observed table}
   \item{nfull} {the number of cells in the full table}
@@ -21,5 +23,5 @@ summary.gllm(object,...)
   \item{coefficients} {the model parameter estimates, standard errors}
   \item{residuals} {Observed and fitted counts, plus Pearsonian residuals}
 }
-\keyword{ print
-}
+\author{ David L Duffy }
+\keyword{ print }
