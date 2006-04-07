@@ -17,7 +17,7 @@ scoregllm(y,s,X,m,tol=1e-5)
      contingency table.}
   \item{tol}{is the convergence criterion for the LR criterion.}
 }
-\values{ 
+\value{ 
   A list with components:
   \item{iter} {the number of scoring iterations until convergence}
   \item{deviance} {the final model deviance (-2 log likelihood)}

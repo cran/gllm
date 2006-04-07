@@ -17,7 +17,7 @@ as207(y,s,X,maxit,tol)
   \item{maxit}{is the number of EM iterations.}
   \item{tol}{is the convergence criterion for the LR criterion.}
 }
-\values{ 
+\value{ 
   A list with components:
   \item{istop} {maximum EM iterations}
   \item{ni} {nrow(X)}

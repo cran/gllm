@@ -18,7 +18,7 @@ gllm(y,s,X,method="hybrid",em.maxit=1,tol=0.00001)
   \item{em.maxit}{is the number of EM iterations.}
   \item{tol}{is the convergence criterion for the LR criterion.}
 }
-\values{ 
+\value{ 
   A list with components:
   \item{iter} {the number of scoring iterations until convergence}
   \item{deviance} {the final model deviance (-2 log likelihood)}

@@ -17,7 +17,7 @@ emgllm(y,s,X,maxit=1000,tol=0.00001)
   \item{maxit}{is the number of EM iterations.}
   \item{tol}{is the convergence criterion for the LR criterion.}
 }
-\values{ 
+\value{ 
   A list with components:
   \item{deviance} {the final model deviance (-2 log likelihood)}
   \item{observed.values} {the observed counts in \code{y}}

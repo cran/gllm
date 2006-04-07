@@ -16,7 +16,7 @@ ld2.model(nall1, nall2, formula="~a1+a2+p1+p2+d")
      p1 the deviation from Hardy-Weinberg expectations for locus1,
      and d the intragametic allelic association parameters.}
 }
-\values{ 
+\value{ 
   A list with components:
   \item{Geno}{is a dummy contingency table showing the expected order.}
   \item{s}{is a vector of indices, one for each cell of the full (unobserved) 

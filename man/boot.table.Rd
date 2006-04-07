@@ -12,7 +12,7 @@ boot.table(y,strata=NULL)
   \item{y}{is the observed contingency table.}
   \item{strata}{is a vector defining the strata for a stratified bootstrap.}
 }
-\values{ 
+\value{ 
   A vector of counts with the same total.
 }
 \examples{

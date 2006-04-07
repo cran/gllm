@@ -15,7 +15,7 @@ ld2(locus1, locus2)
   \item{locus2}{is a character vector containing the genotypes at the second
      locus.}
 }
-\values{ 
+\value{ 
   \item{m0} {base model}
   \item{m1} {estimating LD coefficient(s) assuming HWE}
   \item{m2} {testing HWE at locus 1}

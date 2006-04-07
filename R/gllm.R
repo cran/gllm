@@ -5,7 +5,7 @@
 #
 .First.lib <- function(lib,pkg) {
   library.dynam("gllm",pkg,lib)
-  cat("This is gllm 0.30\n")
+  cat("This is gllm 0.31\n")
 }
 #
 # EM IPF algorithm of Haber AS207

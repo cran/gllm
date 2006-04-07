@@ -9,14 +9,13 @@ emgllm                  Generalized log-linear modelling by EM and
 gllm                    Generalized log-linear modelling
 hildesheim              Invasive Cervical Cancer v exposure to Herpes
                         Simplex Virus
-ld2.model               Write design and filter matrices for
-                        log-linear model of linkage disequilibrium
-                        between two codominant autosomal loci
 ld2                     Estimate linkage disequilibrium between two
+                        codominant autosomal loci
+ld2.model               Write design and filter matrices for log-linear
+                        model of linkage disequilibrium between two
                         codominant autosomal loci
 lsat                    Five dichotomous items from the Law School
                         Admission Test (LSAT)
-print.summary.gllm      Print results of gllm
 scatter                 Create a filter matrix from a summary array of
                         indices
 scoregllm               Generalized log-linear modelling via Fisher

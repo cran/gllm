@@ -22,7 +22,7 @@ boot.gllm(y,s,X,method="hybrid",em.maxit=1,tol=0.00001,strata=NULL,R=200)
   \item{strata}{is a vector identifying the sampling strata.}
   \item{R}{is the number of bootstrap replicates.}
 }
-\values{ 
+\value{ 
   A matrix \eqn{R+1} by \code{ncol(X)} containing the initial estimate
   of the full (unobserved) contingency table, and the \eqn{R} bootstrap
   replicates of the full table.
