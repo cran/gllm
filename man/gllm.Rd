@@ -20,16 +20,16 @@ gllm(y,s,X,method="hybrid",em.maxit=1,tol=0.00001)
 }
 \value{ 
   A list with components:
-  \item{iter} {the number of scoring iterations until convergence}
-  \item{deviance} {the final model deviance (-2 log likelihood)}
-  \item{df} {the model degrees of freedom}
-  \item{coefficients} {the model parameter estimates}
-  \item{se} {the standard errors for the model parameter estimates}
-  \item{V} {the variance-covariance matrix for the model parameter estimates}
-  \item{observed.values} {the observed counts in \code{y}}
-  \item{fitted.values} {the expected counts under the fitted model}
-  \item{residuals} {Pearsonian residuals under the fitted model}
-  \item{full.table} {the expected counts for the full (unobserved) table.}
+  \item{iter}{the number of scoring iterations until convergence}
+  \item{deviance}{the final model deviance (-2 log likelihood)}
+  \item{df}{the model degrees of freedom}
+  \item{coefficients}{the model parameter estimates}
+  \item{se}{the standard errors for the model parameter estimates}
+  \item{V}{the variance-covariance matrix for the model parameter estimates}
+  \item{observed.values}{the observed counts in \code{y}}
+  \item{fitted.values}{the expected counts under the fitted model}
+  \item{residuals}{Pearsonian residuals under the fitted model}
+  \item{full.table}{the expected counts for the full (unobserved) table.}
 }
 \details{ 
 The generalized log-linear model allows for modelling of incomplete

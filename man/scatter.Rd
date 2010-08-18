@@ -14,7 +14,7 @@ scatter(y,s)
      contingency table, representing the appropriate cell of \code{y}}
 }
 \value{ 
-  \item{S} {A matrix of orthogonal columns of 1s and 0s}
+  \item{S}{A matrix of orthogonal columns of 1s and 0s}
 }
 \author{ David L Duffy }
 \examples{

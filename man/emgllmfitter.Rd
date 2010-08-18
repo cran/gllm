@@ -1,5 +1,5 @@
-\name{as207}
-\alias{as207}
+\name{emgllmfitter}
+\alias{emgllmfitter}
 \title{ Generalized log-linear modelling by EM and iterative proportional
 fitting}
 \description{
@@ -7,7 +7,7 @@ Fits log-linear models for incomplete contingency tables,
 via an EM approach.
 }
 \usage{
-as207(y,s,X,maxit,tol) 
+emgllmfitter(y,s,X,maxit,tol) 
 }
 \arguments{
   \item{y}{is the observed contingency table.}
@@ -19,26 +19,20 @@ as207(y,s,X,maxit,tol)
 }
 \value{ 
   A list with components:
-  \item{istop} {maximum EM iterations}
-  \item{ni} {nrow(X)}
-  \item{nid} {nrow(X)}
-  \item{nj} {length(y)}
-  \item{nk} {ncol(X)-1}
-  \item{nkp}{ncol(X)} 
-  \item{ji} {s, the scatter vector}
-  \item{y} {the observed table}
-  \item{c} {the design matrix}
-  \item{conv} {the convergence tolerance}
-  \item{w} {work matrix}
-  \item{v} {work matrix}
-  \item{e} {expected counts for the full (unobserved) table}
-  \item{f} {expected counts}
-  \item{cspr} {Pearsonian \eqn{Chi^2}}
-  \item{cslr} {Likelihood ratio \eqn{Chi^2}}
-  \item{ifault} {error indicator}
+  \item{y}{the observed table}
+  \item{ji}{s, the scatter vector}
+  \item{c}{the design matrix}
+  \item{istop}{maximum EM iterations}
+  \item{conv}{the convergence tolerance}
+  \item{e}{expected counts for the full (unobserved) table}
+  \item{ni}{nrow(X)}
+  \item{nj}{length(y)}
+  \item{nk}{ncol(X)-1}
+  \item{f}{expected counts}
 }
 \details{ 
-The call to the slightly modified AS207 Fortran code from Haber (1984).
+The call to Andreas Borg's C code that fits the model by EM/IPF.  The
+algorithm follows the approach in Haber (1984).
 }
 \references{
 Haber M (1984).  AS207: Fitting a general log-linear model.  \emph{Appl

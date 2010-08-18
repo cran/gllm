@@ -19,10 +19,10 @@ emgllm(y,s,X,maxit=1000,tol=0.00001)
 }
 \value{ 
   A list with components:
-  \item{deviance} {the final model deviance (-2 log likelihood)}
-  \item{observed.values} {the observed counts in \code{y}}
-  \item{fitted.values} {the expected counts under the fitted model}
-  \item{full.table} {the expected counts for the full (unobserved) table.}
+  \item{deviance}{the final model deviance (-2 log likelihood)}
+  \item{observed.values}{the observed counts in \code{y}}
+  \item{fitted.values}{the expected counts under the fitted model}
+  \item{full.table}{the expected counts for the full (unobserved) table.}
 }
 \details{ 
 The generalized log-linear model allows for modelling of incomplete
@@ -54,8 +54,8 @@ thus \eqn{y}, can be fitted via an iterative proportional fitting algorithm
 for \eqn{b} and \eqn{z}, with an EM fitting for \eqn{y}, \eqn{z} and
 \eqn{b} (Haber 1984).  
 
-The \code{emgllm} function is a wrapper for the slightly modified AS207
-Fortran code from Haber (1984).
+The \code{emgllm} function is a wrapper for C code implementing the
+approach in Haber (1984).
 }
 \references{
 Espeland MA (1986).  A general class of models for discrete multivariate

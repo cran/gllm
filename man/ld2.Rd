@@ -16,11 +16,11 @@ ld2(locus1, locus2)
      locus.}
 }
 \value{ 
-  \item{m0} {base model}
-  \item{m1} {estimating LD coefficient(s) assuming HWE}
-  \item{m2} {testing HWE at locus 1}
-  \item{m3} {testing HWE at locus 2}
-  \item{m4} {estimating LD and HWD coefficient(s)}
+  \item{m0}{base model}
+  \item{m1}{estimating LD coefficient(s) assuming HWE}
+  \item{m2}{testing HWE at locus 1}
+  \item{m3}{testing HWE at locus 2}
+  \item{m4}{estimating LD and HWD coefficient(s)}
 }
 \examples{
 MNS<-matrix(c(91,32,5,147,78,17,85,75,7), nr=3)

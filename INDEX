@@ -1,10 +1,10 @@
 anova.gllm              Summarize multiple results from gllm
-as207                   Generalized log-linear modelling by EM and
-                        iterative proportional fitting
 boot.gllm               Bootstrap for generalized log-linear modelling
 boot.table              Produce one bootstrap replicate of a vector of
                         counts
 emgllm                  Generalized log-linear modelling by EM and
+                        iterative proportional fitting
+emgllmfitter            Generalized log-linear modelling by EM and
                         iterative proportional fitting
 gllm                    Generalized log-linear modelling
 hildesheim              Invasive Cervical Cancer v exposure to Herpes

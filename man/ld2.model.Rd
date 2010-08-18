@@ -23,7 +23,6 @@ ld2.model(nall1, nall2, formula="~a1+a2+p1+p2+d")
      contingency table, representing the appropriate cell of \code{y}}
   \item{X}{is the design matrix.}
 }
-\examples{
-}
+
 \keyword{category}
 \keyword{models}

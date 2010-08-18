@@ -5,7 +5,7 @@
 #
 .First.lib <- function(lib,pkg) {
   library.dynam("gllm",pkg,lib)
-  cat("This is gllm 0.31\n")
+  cat("This is gllm 0.33\n")
 }
 #
 # EM IPF algorithm of Haber AS207
@@ -15,8 +15,8 @@ emgllm <- function(y,s,X,maxit=1000,tol=0.00001) {
     X<-model.matrix(X)
   }
   X<-cbind(X,double(nrow(X)))
-  em<-as207(y,s,X,maxit,tol) 
-  deviance<-em$cslr
+  em<-emgllmfitter(y,s,X,maxit,tol) 
+  deviance=2 * sum(em$y * log(em$y / em$f), na.rm=TRUE)
   observed.values<-em$y
   fitted.values<-em$f
   full.table<-em$e
@@ -25,25 +25,18 @@ emgllm <- function(y,s,X,maxit=1000,tol=0.00001) {
        fitted.values=fitted.values,
        full.table=full.table)
 }
-as207 <- function(y,s,X,maxit,tol)
-  .Fortran("gllm",
+emgllmfitter <- function(y,s,X,maxit,tol)
+        .C("gllm",
+            y = as.double(y),
+            ji = as.integer(s-1), # convert indices to C-style, 0:(n-1)
+            c = X,
             istop = as.integer(maxit),
+            conv = as.double(tol),
+            e = double(nrow(X)) + 1, # default inizialization to 1s
             ni = as.integer(nrow(X)),
-            nid = as.integer(nrow(X)),
             nj = as.integer(length(y)),
             nk = as.integer(ncol(X)-1),
-            nkp=  as.integer(ncol(X)),
-            ji = as.integer(s),
-            y = as.double(y),
-            c = X,
-            conv = as.double(tol),
-            w = matrix(rep(0.0,4*nrow(X)),nrow=4),
-            v = matrix(rep(0.0,2*(ncol(X))),nrow=2),
-            e = double(nrow(X)),
             f = double(length(y)),
-            cspr = double(1),
-            cslr = double(1),
-            ifault=as.integer(0),
             PACKAGE="gllm")
 #
 # Convert scatter vector used by AS207 to matrix for scoring method
