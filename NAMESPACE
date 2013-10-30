@@ -1,0 +1,12 @@
+useDynLib("gllm")
+export("anova.gllm",
+       "boot.gllm",
+       "boot.table",
+       "emgllmfitter",
+       "emgllm",
+       "gllm",
+       "ld2.model",
+       "ld2",
+       "scatter",
+       "scoregllm",
+       "summary.gllm")

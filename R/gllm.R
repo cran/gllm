@@ -3,10 +3,7 @@
 #
 # Library setup
 #
-.First.lib <- function(lib,pkg) {
-  library.dynam("gllm",pkg,lib)
-  cat("This is gllm 0.33\n")
-}
+packageStartupMessage("This is gllm 0.34")
 #
 # EM IPF algorithm of Haber AS207
 #
@@ -330,11 +327,11 @@ ld2.model <- function(nall1, nall2, formula="~a1+a2+p1+p2+d") {
   mod<-nall1+nall2-1+ 
        (nall1-1)*(nall1-1)+(nall2-1)*(nall2-1)+ 
        (nall1-1)*(nall2-1)
-  Geno<-matrix(1:gen, nr=ng1, byrow=TRUE)
+  Geno<-matrix(1:gen, nrow=ng1, byrow=TRUE)
   rownames(Geno)<-mkgeno(nall1)
   colnames(Geno)<-mkgeno(nall2)
   S<-array(0, dim=c(nall1,nall1,nall2,nall2))
-  X<-matrix(0, nr=gam, nc=mod)
+  X<-matrix(0, nrow=gam, ncol=mod)
   colnames(X)<-c("Int",paste("a1",2:nall1,sep="."),
                        paste("a2",2:nall2,sep="."),
                        paste("p1",outer(2:nall1,2:nall1,paste,sep=""),sep="."),
@@ -349,7 +346,7 @@ ld2.model <- function(nall1, nall2, formula="~a1+a2+p1+p2+d") {
     k<-k+1
     S[i,i2,j,j2]<-S[i,i2,j2,j]<-S[i2,i,j,j2]<-S[i2,i,j2,j]<-k
   }
-  S<-matrix(S, nr=nall1*nall1, nc=nall2*nall2)
+  S<-matrix(S, nrow=nall1*nall1, ncol=nall2*nall2)
   rownames(S)<-outer(1:nall1,1:nall1,paste,sep="/") 
   colnames(S)<-outer(1:nall2,1:nall2,paste,sep="/") 
 #
@@ -363,14 +360,14 @@ ld2.model <- function(nall1, nall2, formula="~a1+a2+p1+p2+d") {
     a1<-rep(0,nall1)
     a1[i]<-a1[i]+1
     a1[i2]<-a1[i2]+1
-    p1<-matrix(0, nr=nall1, nc=nall1)
+    p1<-matrix(0, nrow=nall1, ncol=nall1)
     p1[i,i2]<-p1[i,i2]+1
     a2<-rep(0,nall2)
     a2[j]<-a2[j]+1
     a2[j2]<-a2[j2]+1
-    p2<-matrix(0, nr=nall2, nc=nall2)
+    p2<-matrix(0, nrow=nall2, ncol=nall2)
     p2[j,j2]<-p2[j,j2]+1
-    d<-matrix(0, nr=nall1, nc=nall2)
+    d<-matrix(0, nrow=nall1, ncol=nall2)
     d[i, j2]<-d[i, j2]+1
     d[i2, j]<-d[i2, j]+1
     X[k,]<-c(1,a1[-1],a2[-1],c(p1[-1,-1]), c(p2[-1,-1]), c(d[-1,-1]))
