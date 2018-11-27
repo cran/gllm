@@ -1,4 +1,8 @@
 useDynLib("gllm")
+importFrom("stats", 
+           "anova", 
+           "model.matrix", 
+           "pchisq")
 export("anova.gllm",
        "boot.gllm",
        "boot.table",
@@ -10,3 +14,7 @@ export("anova.gllm",
        "scatter",
        "scoregllm",
        "summary.gllm")
+S3method(anova, gllm)
+S3method(summary, gllm)
+S3method(print, summary.gllm)
+S3method(print, ld2)
