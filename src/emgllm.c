@@ -37,7 +37,7 @@
 void gllm (double * y, int * s, double * C, int * maxit, double * tol, double * E, 
           int * I, int * J, int * K, double * F)
 {
-  /* Zählvariablen */
+  /* Zahlvariablen */
   unsigned int i;
   unsigned int j;
   
@@ -48,7 +48,7 @@ void gllm (double * y, int * s, double * C, int * maxit, double * tol, double * 
   
  
 
-  /* Zwischenspeicher für F */
+  /* Zwischenspeicher fur F */
  double * F_alt= (double *) R_alloc(*J,sizeof(double));
  for (j=0;j<*J;j++)
    F_alt[j]=0;
@@ -65,7 +65,7 @@ void gllm (double * y, int * s, double * C, int * maxit, double * tol, double * 
     sum=0;
     for (j=0; j<*K; j++)
       sum+=C[i+j* *I];   // Indizierung: Zeile + Spalte * Zeilenanzahl
-    sums[i]=sum; // Jede Zeilensumme speichern, wird noch benötigt
+    sums[i]=sum; // Jede Zeilensumme speichern, wird noch benotigt
     if (sum > max_sum)
       max_sum=sum;
   }
@@ -92,18 +92,18 @@ void gllm (double * y, int * s, double * C, int * maxit, double * tol, double * 
   double * G = (double *) R_alloc(KK,sizeof(double));
   
   /* eigentlicher Algorithmus beginnt hier */
-  int it = 0;  // Zählt Anzahl der Iterationen
+  int it = 0;  // Zahlt Anzahl der Iterationen
   while (it<*maxit)
   {
     it++;
-    /* Aufsummieren der geschätzten beobachtbaren Häufigkeiten in F */
+    /* Aufsummieren der geschatzten beobachtbaren Haufigkeiten in F */
     for (i=0; i<*J; i++) 
       F[i]=0.0;
     for (i=0; i<*I; i++)
       F[s[i]]+=E[i];
       
     
-    /* Konvergenzkriterium überprüfen */
+    /* Konvergenzkriterium uberprufen */
     
     int break_flag = 1;
     for (i=0; i<*J; i++)
@@ -149,7 +149,7 @@ void gllm (double * y, int * s, double * C, int * maxit, double * tol, double * 
           if (G[k]!=0 && C[i+k * *I]!=0)
                 E[i]*=pow(Z[k]/G[k],C[i+k * *I]);
       }
-      /* Konvergenzkriterium überprüfen */
+      /* Konvergenzkriterium uberprufen */
       break_flag=0;
       for (i=0;i<*I;i++)
       {  
